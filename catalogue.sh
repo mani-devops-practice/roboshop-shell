@@ -39,7 +39,7 @@ VALIDATE $? "Install Nodejs 20"
 
 id roboshop &>>$LOGS_FILE
 
-if [ $? ne 0 ]; then
+if [ $? -ne 0 ]; then
     useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOGS_FILE
     VALIDATE $? "Added roboshop user"
 else
@@ -75,7 +75,7 @@ systemctl start catalogue &>>$LOGS_FILE
 VALIDATE $? "Started catalogue service"
 
 
-cp $SCRIPT_DIR/monogo.repo /etc/yum.repos.d/mongo.repo
+cp $SCRIPT_DIR/mongo.repo /etc/yum.repos.d/mongo.repo
 VALIDATE $? "Copying mongo repo"
 
 dnf install mongodb-mongosh -y &>>$LOGS_FILE
