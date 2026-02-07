@@ -43,10 +43,10 @@ if [ $? -ne 0 ]; then
     useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOGS_FILE
     VALIDATE $? "Added roboshop user"
 else
-    echo "Roboshop user already exists .. $Y skipping $N"
+    echo -e "Roboshop user already exists .. $Y skipping $N"
 fi
 
-mkdir /app
+mkdir -p /app
 VALIDATE $? "Creating app directory"
 
 curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip &>>$LOGS_FILE
@@ -89,7 +89,7 @@ if [ $INDEX -le 0 ]; then
     VALIDATE $? "Loading catalogue"
 else
     echo "ALready laoded $Y skipping $N"
-
+fi
 
 systemctl restart catalogue &>>$LOGS_FILE
 VALIDATE $? "Restarted catalogue service"

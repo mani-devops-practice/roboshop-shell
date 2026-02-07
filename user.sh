@@ -8,7 +8,6 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 SCRIPT_DIR=$PWD
-MONGODB_HOST=mongodb.manig.online
 
 
 if [ $USERID -ne 0 ]; then
@@ -39,7 +38,7 @@ VALIDATE $? "Install Nodejs 20"
 
 id roboshop &>>$LOGS_FILE
 
-if [ $? ne 0 ]; then
+if [ $? -ne 0 ]; then
     useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOGS_FILE
     VALIDATE $? "Added roboshop user"
 else
